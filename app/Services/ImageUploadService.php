@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Services;
+
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+
+class ImageUploadService
+{
+    public static function upload(
+        UploadedFile $file,
+        string $folder='survey'
+    ): string
+    {
+        return $file->store(
+            $folder,
+            'public'
+        );
+    }
+
+    public static function delete(
+        ?string $path
+    ): void
+    {
+        if($path && Storage::disk('public')->exists($path))
+        {
+            Storage::disk('public')->delete($path);
+        }
+    }
+
+    public static function url(
+        ?string $path
+    ): string
+    {
+        return $path
+            ? asset('storage/'.$path)
+            : asset('images/no-image.png');
+    }
+}

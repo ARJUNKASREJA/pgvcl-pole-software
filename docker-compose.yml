@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+
+  app:
+
+    build: .
+
+    container_name: pgvcl_app
+
+    ports:
+
+      - "8000:8000"
+
+    volumes:
+
+      - .:/var/www/html
+
+    depends_on:
+
+      - mysql
+
+  mysql:
+
+    image: mysql:8
+
+    restart: always
+
+    environment:
+
+      MYSQL_ROOT_PASSWORD: root
+
+      MYSQL_DATABASE: pgvcl
+
+    ports:
+
+      - "3306:3306"

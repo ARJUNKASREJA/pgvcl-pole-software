@@ -1,0 +1,11 @@
+* text=auto
+
+*.php diff=php
+
+*.css text
+
+*.js text
+
+/vendor export-ignore
+
+/node_modules export-ignore

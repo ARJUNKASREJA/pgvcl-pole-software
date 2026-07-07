@@ -1,0 +1,17 @@
+/vendor
+/node_modules
+/public/build
+/public/hot
+/storage/*.key
+/storage/app/*
+!/storage/app/public
+/bootstrap/cache/*.php
+.env
+.env.backup
+.phpunit.result.cache
+npm-debug.log
+yarn-error.log
+.idea
+.vscode
+.DS_Store
+Thumbs.db
