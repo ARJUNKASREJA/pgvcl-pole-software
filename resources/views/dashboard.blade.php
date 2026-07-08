@@ -20,22 +20,22 @@
 
                 <div class="bg-blue-600 text-white rounded-xl shadow-lg p-6">
                     <h3 class="text-lg font-bold">Projects</h3>
-                    <p class="text-4xl mt-4 font-bold">0</p>
+                    <p class="text-4xl mt-4 font-bold">{{ $projects }}</p>
                 </div>
 
                 <div class="bg-green-600 text-white rounded-xl shadow-lg p-6">
                     <h3 class="text-lg font-bold">Villages</h3>
-                    <p class="text-4xl mt-4 font-bold">0</p>
+                    <p class="text-4xl mt-4 font-bold">{{ $villages }}</p>
                 </div>
 
                 <div class="bg-orange-500 text-white rounded-xl shadow-lg p-6">
                     <h3 class="text-lg font-bold">Feeders</h3>
-                    <p class="text-4xl mt-4 font-bold">0</p>
+                    <p class="text-4xl mt-4 font-bold">{{ $feeders }}</p>
                 </div>
 
                 <div class="bg-red-600 text-white rounded-xl shadow-lg p-6">
                     <h3 class="text-lg font-bold">Total Poles</h3>
-                    <p class="text-4xl mt-4 font-bold">0</p>
+                    <p class="text-4xl mt-4 font-bold">{{ $totalPoles }}</p>
                 </div>
 
             </div>

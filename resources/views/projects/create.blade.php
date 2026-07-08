@@ -1,25 +1,39 @@
 @extends('layouts.admin')
 
+@section('title','Create Project')
+
 @section('content')
 
-<div class="container mt-5">
+<div class="container-fluid">
 
-    <div class="card shadow">
+    <div class="card shadow-sm">
 
         <div class="card-header bg-primary text-white">
-            <h4 class="mb-0">Create New Project</h4>
+
+            <h4 class="mb-0">
+                Create New Project
+            </h4>
+
         </div>
 
         <div class="card-body">
 
             @if ($errors->any())
+
                 <div class="alert alert-danger">
+
                     <ul class="mb-0">
+
                         @foreach ($errors->all() as $error)
+
                             <li>{{ $error }}</li>
+
                         @endforeach
+
                     </ul>
+
                 </div>
+
             @endif
 
             <form action="{{ route('projects.store') }}" method="POST">
@@ -29,103 +43,112 @@
                 <div class="row">
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Project Name</label>
+
+                        <label>Project Name</label>
+
                         <input
                             type="text"
                             name="project_name"
                             class="form-control"
                             value="{{ old('project_name') }}"
                             required>
+
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Project Code</label>
-                        <input
-                            type="text"
-                            name="project_code"
-                            class="form-control"
-                            value="{{ old('project_code') }}"
-                            required>
-                    </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Division</label>
+                        <label>Division</label>
+
                         <input
                             type="text"
                             name="division"
                             class="form-control"
-                            value="{{ old('division') }}">
+                            value="{{ old('division') }}"
+                            required>
+
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Subdivision</label>
+
+                        <label>Sub Division</label>
+
                         <input
                             type="text"
                             name="subdivision"
                             class="form-control"
-                            value="{{ old('subdivision') }}">
+                            value="{{ old('subdivision') }}"
+                            required>
+
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Village</label>
+
+                        <label>Village</label>
+
                         <input
                             type="text"
                             name="village"
                             class="form-control"
-                            value="{{ old('village') }}">
+                            value="{{ old('village') }}"
+                            required>
+
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">Feeder</label>
+
+                        <label>Feeder</label>
+
                         <input
                             type="text"
                             name="feeder"
                             class="form-control"
-                            value="{{ old('feeder') }}">
+                            value="{{ old('feeder') }}"
+                            required>
+
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label">DTC</label>
+
+                        <label>DTC</label>
+
                         <input
                             type="text"
                             name="dtc"
                             class="form-control"
                             value="{{ old('dtc') }}"
                             required>
+
                     </div>
 
-                    <div class="col-md-12 mb-3">
-                        <label class="form-label">Description</label>
+                    <div class="col-12 mb-3">
+
+                        <label>Description</label>
+
                         <textarea
                             name="description"
                             rows="4"
                             class="form-control">{{ old('description') }}</textarea>
-                    </div>
-
-                    <div class="col-md-4 mb-3">
-                        <label class="form-label">Status</label>
-
-                        <select name="status" class="form-select">
-                            <option value="1" {{ old('status',1)==1 ? 'selected' : '' }}>
-                                Active
-                            </option>
-
-                            <option value="0" {{ old('status')==='0' ? 'selected' : '' }}>
-                                Inactive
-                            </option>
-                        </select>
 
                     </div>
 
                 </div>
 
-                <button type="submit" class="btn btn-success">
-                    Save Project
-                </button>
+                <div class="mt-4">
 
-                <a href="{{ route('projects.index') }}" class="btn btn-secondary">
-                    Back
-                </a>
+                    <button class="btn btn-success">
+
+                        Save Project
+
+                    </button>
+
+                    <a href="{{ route('projects.index') }}"
+                       class="btn btn-secondary">
+
+                        Cancel
+
+                    </a>
+
+                </div>
 
             </form>
 
