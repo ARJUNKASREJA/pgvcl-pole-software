@@ -44,7 +44,7 @@
 
                     <div class="col-md-6 mb-3">
 
-                        <label>Project Name</label>
+                        <label class="form-label">Project Name</label>
 
                         <input
                             type="text"
@@ -57,7 +57,7 @@
 
                     <div class="col-md-6 mb-3">
 
-                        <label>Division</label>
+                        <label class="form-label">Division</label>
 
                         <input
                             type="text"
@@ -70,7 +70,7 @@
 
                     <div class="col-md-6 mb-3">
 
-                        <label>Sub Division</label>
+                        <label class="form-label">Sub Division</label>
 
                         <input
                             type="text"
@@ -83,7 +83,7 @@
 
                     <div class="col-md-6 mb-3">
 
-                        <label>Village</label>
+                        <label class="form-label">Village</label>
 
                         <input
                             type="text"
@@ -96,7 +96,7 @@
 
                     <div class="col-md-6 mb-3">
 
-                        <label>Feeder</label>
+                        <label class="form-label">Feeder</label>
 
                         <input
                             type="text"
@@ -109,7 +109,7 @@
 
                     <div class="col-md-6 mb-3">
 
-                        <label>DTC</label>
+                        <label class="form-label">DTC</label>
 
                         <input
                             type="text"
@@ -120,9 +120,20 @@
 
                     </div>
 
+                    <div class="col-md-4 mb-3">
+
+                        <label class="form-label">Status</label>
+
+                        <select name="status" class="form-select">
+                            <option value="1" selected>Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+
+                    </div>
+
                     <div class="col-12 mb-3">
 
-                        <label>Description</label>
+                        <label class="form-label">Description</label>
 
                         <textarea
                             name="description"

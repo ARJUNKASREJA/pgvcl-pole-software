@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePoleRequest;
+use App\Http\Requests\UpdatePoleRequest;
 use App\Models\Pole;
 use App\Models\Project;
 use App\Services\PoleService;
-use App\Http\Requests\StorePoleRequest;
-use App\Http\Requests\UpdatePoleRequest;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PoleController extends Controller
 {
@@ -16,32 +17,27 @@ class PoleController extends Controller
     ) {
     }
 
-    public function index(Request $request)
+    public function index(Request $request): View
     {
-        $search = $request->search;
+        $filters = [
+            'search' => $request->input('search'),
+            'project_id' => $request->input('project_id'),
+            'status' => $request->input('status'),
+            'sort_by' => $request->input('sort_by', 'created_at'),
+            'sort_direction' => $request->input('sort_direction', 'desc'),
+        ];
 
-        $poles = Pole::with('project')
+        $projects = Project::orderBy('project_name')->get();
+        $poles = $this->service->list($filters);
 
-            ->when($search,function($q) use($search){
-
-                $q->where('pole_no','like',"%{$search}%")
-
-                ->orWhere('pole_type','like',"%{$search}%");
-
-            })
-
-            ->latest()
-
-            ->paginate(20);
-
-        return view('poles.index',compact('poles','search'));
+        return view('poles.index', compact('poles', 'projects', 'filters'));
     }
 
-    public function create()
+    public function create(): View
     {
-        $projects=Project::orderBy('project_name')->get();
+        $projects = Project::orderBy('project_name')->get();
 
-        return view('poles.create',compact('projects'));
+        return view('poles.create', compact('projects'));
     }
 
     public function store(StorePoleRequest $request)
@@ -49,36 +45,29 @@ class PoleController extends Controller
         $this->service->store($request->validated());
 
         return redirect()
-
             ->route('poles.index')
-
-            ->with('success','Pole Created Successfully');
+            ->with('success', 'Pole created successfully.');
     }
 
-    public function show(Pole $pole)
+    public function show(Pole $pole): View
     {
-        return view('poles.show',compact('pole'));
+        return view('poles.show', compact('pole'));
     }
 
-    public function edit(Pole $pole)
+    public function edit(Pole $pole): View
     {
-        $projects=Project::orderBy('project_name')->get();
+        $projects = Project::orderBy('project_name')->get();
 
-        return view('poles.edit',compact('pole','projects'));
+        return view('poles.edit', compact('pole', 'projects'));
     }
 
-    public function update(
-        UpdatePoleRequest $request,
-        Pole $pole
-    )
+    public function update(UpdatePoleRequest $request, Pole $pole)
     {
-        $this->service->update($pole,$request->validated());
+        $this->service->update($pole, $request->validated());
 
         return redirect()
-
             ->route('poles.index')
-
-            ->with('success','Pole Updated Successfully');
+            ->with('success', 'Pole updated successfully.');
     }
 
     public function destroy(Pole $pole)
@@ -86,9 +75,7 @@ class PoleController extends Controller
         $this->service->delete($pole);
 
         return redirect()
-
             ->route('poles.index')
-
-            ->with('success','Pole Deleted Successfully');
+            ->with('success', 'Pole deleted successfully.');
     }
 }

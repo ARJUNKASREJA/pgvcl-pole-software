@@ -14,13 +14,17 @@ class UpdateSurveySheetRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-            'project_id' => 'required|exists:projects,id',
-
-            'survey_no' => 'required|max:100',
-
-            'pole_no' => 'required|max:100',
-
+            'project_id' => ['required', 'exists:projects,id'],
+            'survey_no' => ['nullable', 'string', 'max:100', 'unique:survey_sheets,survey_no,' . $this->route('surveySheet')?->id],
+            'pole_no' => ['nullable', 'string', 'max:100'],
+            'consumer_name' => ['nullable', 'string', 'max:255'],
+            'consumer_no' => ['nullable', 'string', 'max:100'],
+            'mobile' => ['nullable', 'string', 'max:20'],
+            'meter_no' => ['nullable', 'string', 'max:100'],
+            'transformer' => ['nullable', 'string', 'max:100'],
+            'latitude' => ['nullable', 'numeric'],
+            'longitude' => ['nullable', 'numeric'],
+            'remarks' => ['nullable', 'string'],
         ];
     }
 }

@@ -29,9 +29,11 @@
 
             @if(session('success'))
 
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-dismissible fade show">
 
                     {{ session('success') }}
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 
                 </div>
 
@@ -59,6 +61,16 @@
                         Search
 
                     </button>
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <a href="{{ route('projects.index') }}" class="btn btn-outline-secondary">
+
+                        Reset
+
+                    </a>
 
                 </div>
 

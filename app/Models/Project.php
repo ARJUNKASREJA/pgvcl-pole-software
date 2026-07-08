@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Project extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $fillable = [
-
         'project_code',
         'project_name',
         'division',
@@ -20,13 +21,10 @@ class Project extends Model
         'dtc',
         'description',
         'status',
-
     ];
 
     protected $casts = [
-
         'status' => 'boolean',
-
     ];
 
     /*
@@ -56,17 +54,22 @@ class Project extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getStatusTextAttribute()
+    public function getStatusTextAttribute(): string
     {
-        return $this->status
-            ? 'Active'
-            : 'Inactive';
+        return $this->status ? 'Active' : 'Inactive';
     }
 
-    public function getStatusBadgeAttribute()
+    public function getStatusBadgeAttribute(): string
     {
-        return $this->status
-            ? 'success'
-            : 'danger';
+        return $this->status ? 'success' : 'danger';
+    }
+
+    public static function generateProjectCode(): string
+    {
+        $lastProject = self::withTrashed()->latest('id')->first();
+
+        $nextNumber = $lastProject ? ((int) str_replace('PRJ-', '', $lastProject->project_code)) + 1 : 1;
+
+        return 'PRJ-' . str_pad((string) $nextNumber, 6, '0', STR_PAD_LEFT);
     }
 }
